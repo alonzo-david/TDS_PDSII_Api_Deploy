@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alonzo-david/TDS_PDSII_Backend_Cliente.git"
+    "url": "git+https://github.com/alonzo-david/TDS_PDSII_Api_Deploy.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alonzo-david/TDS_PDSII_Backend_Cliente/issues"
+    "url": "https://github.com/alonzo-david/TDS_PDSII_Api_Deploy.git/issues"
   },
-  "homepage": "https://github.com/alonzo-david/TDS_PDSII_Backend_Cliente#readme",
+  "homepage": "https://github.com/alonzo-david/TDS_PDSII_Api_Deploy.git#readme",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
