@@ -41,17 +41,14 @@ const execute = (query, params) => {
         if (!cnn)
             throw new Error('Pool was not created. Ensure pool is created when running the app.');
         return new Promise((resolve, reject) => {
-            console.log("QUERY: ", query);
-            console.log("PARAMS", params);
             cnn.query(query, params, (error, results) => {
-                //var data = JSON.parse(JSON.stringify(results));
-                var data2 = results;
+                var data = results;
                 console.log("results db: ", results);
-                console.log("data db: ", data2);
+                console.log("data db: ", data);
                 if (error)
                     reject(error);
                 else
-                    resolve(data2);
+                    resolve(data);
             });
         });
     }

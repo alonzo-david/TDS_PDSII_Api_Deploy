@@ -46,6 +46,6 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(routes_1.router);
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to TDS Rest API." });
+    res.json({ message: "Welcome to Galileo TDS Rest API." });
 });
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
