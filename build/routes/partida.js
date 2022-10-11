@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const partida_controller_1 = require("../controllers/partida.controller");
+const router = (0, express_1.Router)();
+exports.router = router;
+router.get("/:idUsuario", partida_controller_1.getPartidas);
+router.get("/:id", partida_controller_1.getPartida);
+router.post("/", partida_controller_1.postPartida);
