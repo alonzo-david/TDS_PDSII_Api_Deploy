@@ -7,8 +7,9 @@ const handleHttp = (res, message) => {
     });
 };
 exports.handleHttp = handleHttp;
-const handleResponse = (res, message, code) => {
-    res.status(code || 500).send({
+const handleResponse = (res, message, status, code) => {
+    res.status(status || 500).send({
+        code,
         message,
     });
 };

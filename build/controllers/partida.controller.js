@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postPartida = exports.getPartidas = exports.getPartida = void 0;
+exports.postPartida = exports.getRestaurarPartida = exports.getPartidas = exports.getPartida = void 0;
 const Services = __importStar(require("../services/partida.service"));
 const error_handle_1 = require("../utils/error.handle");
 const getPartida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,6 +57,17 @@ const getPartidas = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getPartidas = getPartidas;
+const getRestaurarPartida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const Id = req.params.idUsuario;
+        const result = yield Services.getRestaurarPartida(Id);
+        res.status(200).send(result);
+    }
+    catch (e) {
+        (0, error_handle_1.handleHttp)(res, "ERROR_GET_RESTURAR_PARTIDA");
+    }
+});
+exports.getRestaurarPartida = getRestaurarPartida;
 const postPartida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield Services.postPartida(req.body);

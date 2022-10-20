@@ -48,10 +48,10 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield Services.loginUser(req.body);
         if (result instanceof error_model_1.Error) {
             const a = result;
-            (0, error_handle_1.handleResponse)(res, a.message, a.status);
+            (0, error_handle_1.handleResponse)(res, a.message, a.status, a.code);
             return;
         }
-        res.status(200).send({ result });
+        res.status(200).send(result);
     }
     catch (e) {
         (0, error_handle_1.handleHttp)(res, "ERROR_GET_AUTH");
@@ -63,7 +63,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const result = yield Services.registrarUser(req.body);
         if (result instanceof error_model_1.Error) {
             const a = result;
-            (0, error_handle_1.handleResponse)(res, a.message, a.status);
+            (0, error_handle_1.handleResponse)(res, a.message, a.status, a.code);
             return;
         }
         res.status(200).send({ result });

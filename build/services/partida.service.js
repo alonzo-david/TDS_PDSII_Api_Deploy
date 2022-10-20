@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postPartida = exports.getPartidas = exports.getPartida = void 0;
+exports.postPartida = exports.getRestaurarPartida = exports.getPartidas = exports.getPartida = void 0;
 const db_1 = require("../config/db");
 const getPartida = (id) => __awaiter(void 0, void 0, void 0, function* () {
     let SQL = `call sp_ListarPartida(?)`;
@@ -21,6 +21,11 @@ const getPartidas = (idUsuario) => __awaiter(void 0, void 0, void 0, function* (
     return (0, db_1.execute)(SQL, [idUsuario]);
 });
 exports.getPartidas = getPartidas;
+const getRestaurarPartida = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let SQL = `call sp_RestaurarPartida(?)`;
+    return (0, db_1.execute)(SQL, [id]);
+});
+exports.getRestaurarPartida = getRestaurarPartida;
 const postPartida = (partida) => __awaiter(void 0, void 0, void 0, function* () {
     let SQL = `call sp_CrearPartida(?,?,?,?,?,?)`;
     const result = yield (0, db_1.execute)(SQL, [

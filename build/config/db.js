@@ -10,6 +10,7 @@ const init = () => {
     try {
         cnn = (0, mysql2_1.createConnection)({
             //connectionLimit: dataSource.DB_CONNECTION_LIMIT,
+            connectionLimit: 10,
             host: dataSource.HOST,
             user: dataSource.USER,
             password: dataSource.PASSWORD,
@@ -41,6 +42,8 @@ const execute = (query, params) => {
         if (!cnn)
             throw new Error('Pool was not created. Ensure pool is created when running the app.');
         return new Promise((resolve, reject) => {
+            console.log("QUERY ", query);
+            console.log("PARAMS ", params);
             cnn.query(query, params, (error, results) => {
                 var data = results;
                 console.log("results db: ", results);

@@ -15,10 +15,13 @@ const error_model_1 = require("../models/error.model");
 const bcrypt_handle_1 = require("../utils/bcrypt.handle");
 const registrarUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     let userInfo = yield checkUser(usuario.Usuario).then((response) => JSON.stringify(response));
-    userInfo = JSON.parse(userInfo)[0][0];
-    if (userInfo != undefined || userInfo.Usuario != "") {
-        let error = new error_model_1.Error(404, "USER_ALREADY_EXISTS");
-        return error;
+    if (userInfo !== undefined) {
+        userInfo = JSON.parse(userInfo)[0][0];
+        console.log("user info", userInfo);
+        if (userInfo.Usuario != "") {
+            let error = new error_model_1.Error(200, 0, "USER_ALREADY_EXISTS");
+            return error;
+        }
     }
     //const passwordHash = await encrypt(usuario.Password);
     usuario.Password = yield (0, bcrypt_handle_1.encrypt)(usuario.Password);
@@ -45,7 +48,7 @@ const loginUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("PASSWORD: ", result.Password);
     if (result == undefined || result.Usuario == "") {
         console.log("UNDEFINED");
-        let error = new error_model_1.Error(404, "NOT_FOUND_USER");
+        let error = new error_model_1.Error(200, 0, "NOT_FOUND_USER");
         return error;
     }
     const passwordHash = result.Password;
@@ -53,7 +56,7 @@ const loginUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Password Hash: ", passwordHash);
     console.log("Password Correct: ", isCorrect);
     if (!isCorrect) {
-        let error = new error_model_1.Error(404, "PASSWORD_INCORRECT");
+        let error = new error_model_1.Error(200, 0, "PASSWORD_INCORRECT");
         return error;
     }
     return result;
