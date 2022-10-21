@@ -66,7 +66,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             (0, error_handle_1.handleResponse)(res, a.message, a.status, a.code);
             return;
         }
-        res.status(200).send({ result });
+        res.status(201).send({ result });
     }
     catch (e) {
         (0, error_handle_1.handleHttp)(res, "ERROR_POST_AUTH");
