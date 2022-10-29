@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.updatePassword = exports.loginUser = exports.registrarUser = void 0;
+exports.getEstadoAvatar = exports.updateUser = exports.updatePassword = exports.loginUser = exports.registrarUser = void 0;
 const db_1 = require("../config/db");
 const error_model_1 = require("../models/error.model");
 const bcrypt_handle_1 = require("../utils/bcrypt.handle");
@@ -27,7 +27,7 @@ const registrarUser = (usuario) => __awaiter(void 0, void 0, void 0, function* (
     usuario.Password = yield (0, bcrypt_handle_1.encrypt)(usuario.Password);
     //console.log("constrasenia encriptada: ", passwordHash);
     console.log("USER: ", usuario);
-    const SQL = `call sp_CrearUsuario(?,?,?,?,?,?,?,?)`;
+    const SQL = `call sp_CrearUsuario(?,?,?,?,?,?,?)`;
     const result = yield (0, db_1.execute)(SQL, [
         usuario.Nombres,
         usuario.Apellidos,
@@ -35,8 +35,7 @@ const registrarUser = (usuario) => __awaiter(void 0, void 0, void 0, function* (
         usuario.CorreoElectronico,
         usuario.Usuario,
         usuario.Password,
-        usuario.RecibirNotificacion,
-        usuario.ReproducirMusica,
+        usuario.IdAvatar,
     ]);
     return result.affectedRows;
 });
@@ -69,18 +68,19 @@ const updatePassword = (usuario) => __awaiter(void 0, void 0, void 0, function* 
         usuario.Id,
         usuario.Password,
     ]);
-    return result.affectedRows > 0;
+    return result;
 });
 exports.updatePassword = updatePassword;
 const updateUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("UPDATE USER DATA: ", usuario);
-    let SQL = `call sp_ActualizarUsuario(?,?,?,?,?)`;
+    let SQL = `call sp_ActualizarUsuario(?,?,?,?,?,?)`;
     const result = yield (0, db_1.execute)(SQL, [
         usuario.Id,
         usuario.Nombres,
         usuario.Apellidos,
         usuario.FechaNacimiento,
         usuario.CorreoElectronico,
+        usuario.IdAvatar,
     ]);
     return result;
 });
@@ -91,3 +91,8 @@ const checkUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     const r = JSON.stringify(result);
     return result;
 });
+const getEstadoAvatar = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let SQL = `call sp_EstadoAvatar(?)`;
+    return (0, db_1.execute)(SQL, [id]);
+});
+exports.getEstadoAvatar = getEstadoAvatar;

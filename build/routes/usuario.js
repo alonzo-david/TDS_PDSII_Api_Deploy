@@ -6,3 +6,4 @@ const usuario_controller_1 = require("../controllers/usuario.controller");
 const router = (0, express_1.Router)();
 exports.router = router;
 router.put("/:id", usuario_controller_1.updateUser);
+router.get("/estado-avatar/:idUsuario", usuario_controller_1.getEstadoAvatar);

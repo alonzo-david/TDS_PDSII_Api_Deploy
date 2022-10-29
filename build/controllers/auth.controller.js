@@ -44,7 +44,6 @@ const error_handle_1 = require("../utils/error.handle");
 // };
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("*****Auth Controller: ", req.body);
         const result = yield Services.loginUser(req.body);
         if (result instanceof error_model_1.Error) {
             const a = result;

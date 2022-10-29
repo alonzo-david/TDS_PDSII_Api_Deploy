@@ -32,16 +32,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = void 0;
+exports.getEstadoAvatar = exports.updateUser = void 0;
 const Services = __importStar(require("../services/usuario.service"));
 const error_handle_1 = require("../utils/error.handle");
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield Services.updateUser(Object.assign(Object.assign({}, req.body), { Id: req.params.id }));
-        res.status(200).send({ result });
+        res.status(200).send(result);
     }
     catch (error) {
         (0, error_handle_1.handleHttp)(res, "ERROR_GET_ITEMS");
     }
 });
 exports.updateUser = updateUser;
+const getEstadoAvatar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const Id = req.params.idUsuario;
+        const result = yield Services.getEstadoAvatar(Id);
+        res.status(200).send(result);
+    }
+    catch (e) {
+        (0, error_handle_1.handleHttp)(res, "ERROR_GET_ESTADO_AVATAR");
+    }
+});
+exports.getEstadoAvatar = getEstadoAvatar;
