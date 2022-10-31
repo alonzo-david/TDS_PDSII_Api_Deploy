@@ -31,7 +31,6 @@ const verificarTokenPublic = (req, res, next) => __awaiter(void 0, void 0, void 
                     message: "Token inválida",
                 });
             }
-            console.log("jwt proveida ", jwt);
             next();
         }
         else {

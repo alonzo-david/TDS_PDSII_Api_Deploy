@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const configapi_controller_1 = require("../controllers/configapi.controller");
+const router = (0, express_1.Router)();
+exports.router = router;
+router.get("/", configapi_controller_1.getListarApi);
+router.get("/Last", configapi_controller_1.getListarConfigApi);
+router.post("/", configapi_controller_1.postConfigApi);

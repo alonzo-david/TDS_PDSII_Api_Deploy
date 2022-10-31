@@ -17,7 +17,6 @@ const registrarUser = (usuario) => __awaiter(void 0, void 0, void 0, function* (
     let userInfo = yield checkUser(usuario.Usuario).then((response) => JSON.stringify(response));
     if (userInfo !== undefined) {
         userInfo = JSON.parse(userInfo)[0][0];
-        console.log("user info", userInfo);
         if (userInfo.Usuario != "") {
             let error = new error_model_1.Error(200, 0, "USER_ALREADY_EXISTS");
             return error;
@@ -25,8 +24,6 @@ const registrarUser = (usuario) => __awaiter(void 0, void 0, void 0, function* (
     }
     //const passwordHash = await encrypt(usuario.Password);
     usuario.Password = yield (0, bcrypt_handle_1.encrypt)(usuario.Password);
-    //console.log("constrasenia encriptada: ", passwordHash);
-    console.log("USER: ", usuario);
     const SQL = `call sp_CrearUsuario(?,?,?,?,?,?,?)`;
     const result = yield (0, db_1.execute)(SQL, [
         usuario.Nombres,
@@ -43,17 +40,12 @@ exports.registrarUser = registrarUser;
 const loginUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
     let result = yield checkUser(usuario.Usuario).then((response) => JSON.stringify(response));
     result = JSON.parse(result)[0][0];
-    console.log("USER: ", result.Usuario);
-    console.log("PASSWORD: ", result.Password);
     if (result == undefined || result.Usuario == "") {
-        console.log("UNDEFINED");
         let error = new error_model_1.Error(200, 0, "NOT_FOUND_USER");
         return error;
     }
     const passwordHash = result.Password;
     const isCorrect = yield (0, bcrypt_handle_1.verified)(usuario.Password, passwordHash);
-    console.log("Password Hash: ", passwordHash);
-    console.log("Password Correct: ", isCorrect);
     if (!isCorrect) {
         let error = new error_model_1.Error(200, 0, "PASSWORD_INCORRECT");
         return error;
@@ -72,7 +64,6 @@ const updatePassword = (usuario) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.updatePassword = updatePassword;
 const updateUser = (usuario) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("UPDATE USER DATA: ", usuario);
     let SQL = `call sp_ActualizarUsuario(?,?,?,?,?,?)`;
     const result = yield (0, db_1.execute)(SQL, [
         usuario.Id,
